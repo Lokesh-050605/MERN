@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import background from "../../assets/images/bg.png";
 
 const SignUp = () => {
-  const [name, setName] = useState(() => localStorage.getItem("name") || "");
-  const [email, setEmail] = useState(() => localStorage.getItem("email") || "");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -44,8 +44,6 @@ const SignUp = () => {
     validatePassword(password);
 
     if (!nameError && !emailError && !passwordError) {
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
       alert("Registration successful!");
       // Add API call or navigation logic here
     }

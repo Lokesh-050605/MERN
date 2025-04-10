@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import background from "../../assets/images/bg.png";
+import background from "../../assets/images/bg.png"; // Adjust the path as necessary
 
-const SignUp = () => {
-  const [name, setName] = useState(() => localStorage.getItem("name") || "");
-  const [email, setEmail] = useState(() => localStorage.getItem("email") || "");
+const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nameError, setNameError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
-  const validateName = (value) => {
-    const nameRegex = /^[A-Za-z\s]{3,}$/;
-    if (!nameRegex.test(value)) {
-      setNameError("Name must be at least 3 characters and contain only letters.");
-    } else {
-      setNameError("");
-    }
-  };
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const validateEmail = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,17 +28,23 @@ const SignUp = () => {
     }
   };
 
+  const validateConfirmPassword = (value) => {
+    if (value !== password) {
+      setConfirmPasswordError("Passwords do not match.");
+    } else {
+      setConfirmPasswordError("");
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    validateName(name);
     validateEmail(email);
     validatePassword(password);
+    validateConfirmPassword(confirmPassword);
 
-    if (!nameError && !emailError && !passwordError) {
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
-      alert("Registration successful!");
-      // Add API call or navigation logic here
+    if (!emailError && !passwordError && !confirmPasswordError) {
+      alert("Password reset successful!");
+      // Add API call or logic to handle password reset here
     }
   };
 
@@ -67,30 +64,16 @@ const SignUp = () => {
         zIndex: 0,
       }}
     >
-      <div className="bg-white p-4 rounded-4 shadow-lg" style={{ 
+      <div className="bg-white p-5 rounded-5 shadow-lg" style={{ 
           maxWidth: "400px", 
           width: "90%", 
           background: "rgba(255, 255, 255, 0.5)", 
           backdropFilter: "blur(20px)" 
         }}>
-        <h2 className="text-center mb-4">Sign Up</h2>
+        <h2 className="text-center mb-4">Forgot Password</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label className="form-label">Name</label>
-            <input 
-              type="text" 
-              className={`form-control ${nameError ? "is-invalid" : ""}`} 
-              value={name} 
-              onChange={(e) => {
-                setName(e.target.value);
-                validateName(e.target.value);
-              }} 
-              required 
-            />
-            {nameError && <div className="invalid-feedback">{nameError}</div>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Email</label>
+            <label className="form-label">Enter your email</label>
             <input 
               type="email" 
               className={`form-control ${emailError ? "is-invalid" : ""}`} 
@@ -104,7 +87,7 @@ const SignUp = () => {
             {emailError && <div className="invalid-feedback">{emailError}</div>}
           </div>
           <div className="mb-3">
-            <label className="form-label">Password</label>
+            <label className="form-label">New Password</label>
             <input 
               type="password" 
               className={`form-control ${passwordError ? "is-invalid" : ""}`} 
@@ -117,9 +100,23 @@ const SignUp = () => {
             />
             {passwordError && <div className="invalid-feedback">{passwordError}</div>}
           </div>
-          <button type="submit" className="btn btn-primary w-100">Sign Up</button>
-          <div className="mt-2 text-center">
-            <Link to="/sign-in">Already have an account? Sign In</Link>
+          <div className="mb-3">
+            <label className="form-label">Confirm Password</label>
+            <input 
+              type="password" 
+              className={`form-control ${confirmPasswordError ? "is-invalid" : ""}`} 
+              value={confirmPassword} 
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                validateConfirmPassword(e.target.value);
+              }} 
+              required 
+            />
+            {confirmPasswordError && <div className="invalid-feedback">{confirmPasswordError}</div>}
+          </div>
+          <button type="submit" className="btn btn-primary w-100">Reset Password</button>
+          <div className="mt-3 text-center">
+            <Link to="/sign-in">Back to Sign In</Link>
           </div>
         </form>
       </div>
@@ -127,4 +124,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ForgotPassword;

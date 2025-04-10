@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import background from "../../assets/images/bg.png"; // Adjust the path as necessary
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(() => localStorage.getItem("email") || "");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -32,6 +32,7 @@ const SignIn = () => {
     validatePassword(password);
 
     if (!emailError && !passwordError) {
+      localStorage.setItem("email", email);
       alert("Form submitted successfully!");
       // Add API call or navigation logic here
     }

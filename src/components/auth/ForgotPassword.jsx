@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import background from "../../assets/images/bg.png"; // Adjust the path as necessary
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(() => localStorage.getItem("email") || "");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [emailError, setEmailError] = useState("");
