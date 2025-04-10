@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
-import ForgotPassword from "./components/ForgotPassword";
-import Home from "./components/Home";
+import SignIn from "../components/auth/SignIn";
+import SignUp from "../components/auth/SignUp";
+import "../styles/index.css";
+import ForgotPassword from "../components/auth/ForgotPassword";
+import Home from "../components/home/Home";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </Router>
+
   );
 };
 

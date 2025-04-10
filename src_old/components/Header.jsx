@@ -17,13 +17,17 @@ const Header = () => {
           <a href="#" className="text-decoration-none text-dark fw-bold">Contact</a>
 
           {/* Login Button */}
-          <button className="btn" style={{
-            backgroundColor: "#ff5733",
-            color: "white",
-            borderRadius: "20px",
-            padding: "8px 20px",
-            fontWeight: "bold"
-          }}>
+          <button 
+            className="btn" 
+            style={{
+              backgroundColor: "#ff5733",
+              color: "white",
+              borderRadius: "20px",
+              padding: "8px 20px",
+              fontWeight: "bold"
+            }}
+            onClick={() => window.location.href = "/sign-in"}
+          >
             Login
           </button>
         </div>
